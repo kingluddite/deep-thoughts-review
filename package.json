@@ -2,33 +2,29 @@
   "name": "deep-thoughts-review",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "cd server && npm start",
+    "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kingluddite/deep_thoughts_review.git"
+    "url": "git+https://github.com/kingluddite/deep-thoughts-review.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kingluddite/deep_thoughts_review/issues"
+    "url": "https://github.com/kingluddite/deep-thoughts-review/issues"
   },
-  "homepage": "https://github.com/kingluddite/deep_thoughts_review#readme",
+  "homepage": "https://github.com/kingluddite/deep-thoughts-review#readme",
+  "dependencies": {
+    "if-env": "^1.0.4"
+  },
   "devDependencies": {
-    "babel-eslint": "^10.1.0",
-    "eslint": "^7.23.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^6.15.0",
-    "eslint-config-wesbos": "^1.0.1",
-    "eslint-plugin-html": "^6.1.2",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-react": "^7.23.1",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.2.1"
+    "concurrently": "^6.0.1"
   }
 }
