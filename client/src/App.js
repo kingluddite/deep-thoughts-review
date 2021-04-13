@@ -14,7 +14,20 @@ import SingleThought from './pages/SingleThought';
 import NoMatch from './pages/NoMatch';
 
 const client = new ApolloClient({
-  uri: 'http://localhost:3001/graphql',
+  request: (operation) => {
+    // grab the token from localStorage
+    const token = localStorage.getItem('id_token');
+
+    operation.setContext({
+      // if there is a token add it to the header with Bearer format
+      // if not, don't add it
+      headers: {
+        authorization: token ? `Bearer ${token}` : '',
+      },
+    });
+  },
+  // I removed the preface of `http://localhost:3001`
+  uri: '/graphql',
 });
 
 function App() {
